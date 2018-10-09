@@ -6,7 +6,7 @@
     <title>Pedigrab @yield('title')</title>
     <!-- Latest compiled and minified CSS -->
    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
-    <link href="{{ asset('/css/carousel.css')}}" rel="stylesheet">
+    <link href="{{ asset('/css/custom.css')}}" rel="stylesheet">
     <link href="{{ asset('/css/font-awesome.min.css') }}" rel="stylesheet">
 
 

@@ -8,10 +8,10 @@
 @include('partials._nav')
 <!-- Begin page content -->
 <main role="main">
-    {{--@include('inc.messages')--}}
+    @include('inc.messages')
     @yield('content')
-    @include('partials._footer')
 </main>
+@include('partials._footer')
 @include('partials._javascript')
 @stack('scripts')
 </body>
