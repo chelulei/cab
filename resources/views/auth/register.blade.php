@@ -1,5 +1,4 @@
 @extends('layouts.main')
-
 @section('content')
     <div class="container register">
         <div class="row">
@@ -434,7 +433,7 @@
             </div>
         </div>
     </div>
-
+    <!-- /.container -->
 @endsection
 @push('styles')
     <link href="{{ asset('/css/form-elements.css') }}" rel="stylesheet">

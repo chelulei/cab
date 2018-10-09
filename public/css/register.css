@@ -1,7 +1,9 @@
 .navbar-nav a {
     display: none;
 }
-
+h5{
+   color: #272B30;
+}
 .register{
     background: -webkit-linear-gradient(left, #3931af, #00c6ff);
     margin-top: 3%;
