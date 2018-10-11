@@ -6,7 +6,7 @@
 </head>
 <body>
 @include('partials._nav')
-<!-- Begin page content -->
+
 <main role="main">
     @include('inc.messages')
     @yield('content')
