@@ -1,5 +1,4 @@
 @extends('layouts.main')
-
 @section('content')
     <div class="container register">
         <div class="row">
@@ -156,11 +155,9 @@
                                         @endif
                                     </div>
                                     <div class="form-group input-group">
-                                        <select class="custom-select" style="max-width:80px;">
-                                            <option selected="">+971</option>
-                                            <option value="1">+972</option>
-                                            <option value="2">+198</option>
-                                            <option value="3">+701</option>
+                                        <select class="custom-select" style="max-width:80px;" name="code">
+                                            <option selected="">+254</option>
+                                            <option value="1">+63</option>
                                         </select>
                                         <input name="phone_number" class="form-control" placeholder="Phone number" type="number">
                                     </div>

@@ -7,10 +7,14 @@
 <script src="{{asset('js/popper.min.js')}}"></script>
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
 <script src="{{asset('js/popper.min.js')}}"></script>
- <script src="{{ asset('/js/scripts.js') }}"></script>
- <script src="{{ asset('/js/holder.min.js') }}"></script>
+<script src="{{ asset('/js/holder.min.js') }}"></script>
+<script src="{{ asset('/js/scripts.js') }}"></script>
  <script>
      jQuery(document).ready(function($) {
+
+         $(window).on('load', function() {
+             $('#slider').nivoSlider();
+         });
          //Remove alert
          window.setTimeout(function() {
              $(".alert").fadeTo(500, 0).slideUp(500, function(){
