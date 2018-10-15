@@ -6,6 +6,7 @@ use App\Address;
 use App\Cartype;
 use App\Idcard;
 use App\User;
+use App\Country;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -81,7 +82,7 @@ class RegisterController extends Controller
             'gender' => $data['gender'],
             'username' => $data['username'],
             'password' => Hash::make($data['password']),
-            'phone_number' => $data['phone_number'],
+            'phone_number' => $data['code'].$data['phone_number'],
 //            'profile_image' => $data['profile_image'],
             'user_type' => $data['user_type'],
             'country' => $data['country'],
@@ -126,6 +127,13 @@ class RegisterController extends Controller
         return $user;
 
 
+    }
+
+
+    public function showRegistrationForm()
+    {
+        $countries = Country::all();
+        return view('auth.register')->with('countries',$countries);
     }
 
 }

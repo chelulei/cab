@@ -10,8 +10,9 @@
 <main role="main">
     @include('inc.messages')
     @yield('content')
+    @include('partials._footer')
 </main>
-@include('partials._footer')
+
 @include('partials._javascript')
 @stack('scripts')
 </body>

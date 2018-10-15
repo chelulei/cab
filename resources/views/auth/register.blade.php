@@ -1,15 +1,17 @@
 @extends('layouts.main')
 @section('content')
-    <div class="register">
+    <div class="container register mb-5">
         <div class="row">
-            <div class="col-md-3 register-left">
+            <div class="col-md-4 register-left">
                 <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt=""/>
                 <h3>Welcome</h3>
                 <p>loremm</p>
                 <a class="btn btn-outline-light" href="{{ route('login') }}">{{ __('Login') }}</a>
                 <br/>
             </div>
-            <div class="col-md-9 register-right">
+            <div class="col-md-8 register-right">
+
+
                 <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
@@ -24,6 +26,7 @@
                         </a>
                     </li>
                 </ul>
+
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                         <h4 class="register-heading">Register as a Rider</h4>
@@ -143,21 +146,24 @@
 
                                     </div>
                                     <div class="form-group">
-                                        <input id="country" type="text"
-                                               class="form-control{{ $errors->has('country') ? ' is-invalid' : '' }}"
-                                               name="country" value="{{ old('country') }}" placeholder="Country *"
-                                               required>
-
+                                        <select name="country" class="form-control custom-select select2" required>
+                                            <option value="">---Choose Country---</option>
+                                            @foreach ($countries as $country)
+                                                <option value="{{ $country->country_name}}">{{ $country->country_name}}</option>
+                                            @endforeach
+                                        </select>
                                         @if ($errors->has('country'))
-                                            <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('country') }}</strong>
+                                            <span class="help-block">
+                                        <strong>{{ $errors->first('country') }}</strong>
                                     </span>
                                         @endif
                                     </div>
+                                    <br>
                                     <div class="form-group input-group">
-                                        <select class="custom-select" style="max-width:80px;" name="code">
-                                            <option selected="">+254</option>
-                                            <option value="1">+63</option>
+                                        <select class="custom-select select2" style="max-width:80px;" name="code">
+                                            @foreach ($countries as $country)
+                                                <option value="{{ $country->phone_prefix}}">{{$country->phone_prefix}}</option>
+                                            @endforeach
                                         </select>
                                         <input name="phone_number" class="form-control" placeholder="Phone number" type="number">
                                     </div>
@@ -181,7 +187,6 @@
                         <h3 class="register-heading">Register as a Driver</h3>
                         <div class="row register-form">
                             <form role="form" action="{{ route('register') }}" method="post" class="registration-form" enctype="multipart/form-data">
-
                                 <fieldset>
                                     <legend><h5>Step 1 / 3 Account Details</h5></legend>
                                     <div class="form-row form-bottom">
@@ -272,8 +277,8 @@
 
                                                 @if ($errors->has('username'))
                                                     <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('username') }}</strong>
-                                                </span>
+                                <strong>{{ $errors->first('username') }}</strong>
+                                </span>
                                                 @endif
                                             </div>
                                             <div class="form-group">
@@ -283,8 +288,8 @@
 
                                                 @if ($errors->has('password'))
                                                     <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('password') }}</strong>
-                                                </span>
+                                    <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
                                                 @endif
                                             </div>
 
@@ -296,32 +301,35 @@
 
                                             </div>
                                             <div class="form-group">
-                                                <input id="country" type="text"
-                                                       class="form-control{{ $errors->has('country') ? ' is-invalid' : '' }}"
-                                                       name="country" value="{{ old('country') }}"
-                                                       placeholder="Country *" required>
-
+                                                <select name="country" class="form-control custom-select select2" required>
+                                                    <option value="">---Choose Country---</option>
+                                                    @foreach ($countries as $country)
+                                                        <option value="{{ $country->country_name}}">{{ $country->country_name}}</option>
+                                                    @endforeach
+                                                </select>
                                                 @if ($errors->has('country'))
-                                                    <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('country') }}</strong>
-                                                </span>
+                                                    <span class="help-block">
+                                        <strong>{{ $errors->first('country') }}</strong>
+                                    </span>
                                                 @endif
                                             </div>
+                                            <br>
                                             <div class="form-group input-group">
-                                                <select class="custom-select" style="max-width:80px;">
-                                                    <option selected="">+971</option>
-                                                    <option value="1">+972</option>
-                                                    <option value="2">+198</option>
-                                                    <option value="3">+701</option>
+                                                <select class="custom-select select2" style="max-width:80px;" name="code">
+                                                    @foreach ($countries as $country)
+                                                        <option value="{{ $country->phone_prefix}}">{{$country->phone_prefix}}</option>
+                                                    @endforeach
                                                 </select>
                                                 <input name="phone_number" class="form-control" placeholder="Phone number" type="number">
                                             </div>
+
                                         </div>
                                         <!-- /.col-md-6 -->
                                         <button type="button" class="btn btn-next">Next</button>
                                     </div>
 
                                 </fieldset>
+
 
                                 <fieldset>
                                     <legend><h5>Step 2 / 3 ID Details</h5></legend>
