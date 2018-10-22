@@ -53,7 +53,7 @@
                                         <input id="middlename" type="text"
                                                class="form-control{{ $errors->has('middlename') ? ' is-invalid' : '' }}"
                                                name="middlename" value="{{ old('middlename') }}"
-                                               placeholder="MiddleName *" required autofocus>
+                                               placeholder="MiddleName" autofocus>
 
                                         @if ($errors->has('middlename'))
                                             <span class="invalid-feedback" role="alert">
@@ -187,8 +187,11 @@
                         <h3 class="register-heading">Register as a Driver</h3>
                         <div class="row register-form">
                             <form role="form" action="{{ route('register') }}" method="post" class="registration-form" enctype="multipart/form-data">
+
                                 <fieldset>
+                                    @csrf
                                     <legend><h5>Step 1 / 3 Account Details</h5></legend>
+                                    <input type="hidden" name="user_type" value="passenger">
                                     <div class="form-row form-bottom">
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -430,7 +433,6 @@
                                         <button type="submit" class="btn">Sign me up!</button>
                                     </div>
                                 </fieldset>
-                                {{csrf_field()}}
                             </form>
                             <!-- /.col-md-8 -->
                         </div>

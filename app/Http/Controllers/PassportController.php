@@ -1,12 +1,11 @@
 <?php
-
 namespace App\Http\Controllers;
 use App\Address;
 use App\Cartype;
 use App\Idcard;
 use App\User;
+use App\Country;
 use Illuminate\Http\Request;
-
 class PassportController extends Controller
 {
     /**
@@ -23,64 +22,59 @@ class PassportController extends Controller
             'date_birth' => 'required',
             'gender' => 'required',
             'username' => 'required|string|max:255',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:6',
             'phone_number' => 'required',
             'email' => 'required|string|email|max:255|unique:users',
         ]);
 
         $user = User::create([
-            'firstname' => $request->firstname
+            'firstname' => $request->firstname,
+            'middlename' => $request->middlename,
             'lastname' => $request->lastname,
             'date_birth' => $request->date_birth,
             'gender' => $request->gender,
-            'username' => $request->username,
+            'email' => $request->email,
             'username' => $request->username,
             'password' => bcrypt($request->password),
-            'phone_number'=> $request->phone_number,
-//            'profile_image' => $data['profile_image'],
-            'user_type' => $request->phone_number,
-            'country'=> $request->country,
-            'email' => $request->email,
+            'user_type' => $request->user_type,
+            'country' => $request->country,
+            'phone_number' => $request->phone_number,
+            'profile_pic' => $request->profile_pic
         ]);
 
         $userId = $user->id;
         $userName = $user->username;
         $userType = $user->user_type;
-
         if ($userType=='driver'){
-
             Address::create([
                 'username' => $userName,
-                'street' => $data['street'],
-                'city' => $data['city'],
-                'province' => $data['province'],
+                'street' =>$request->street,
+                'city' =>  $request->city,
+                'province' => $request->province
 
             ]);
-
             Cartype::create([
                 'username' => $userName,
-                'car_type' => $data['car_type'],
-                'franchise_number' => $data['franchise_number'],
-                'plate_number' => $data['plate_number'],
-                'cr_number' => $data['cr_number'],
-                'or_number' => $data['or_number'],
-                'lto_expiry_date' => $data['lto_expiry_date'],
-
+                'car_type' => $request->car_type,
+                'franchise_number'=> $request->franchise_number,
+                'plate_number' => $request->plate_number,
+                'cr_number' =>  $request->cr_number,
+                'or_number' =>  $request->or_number,
+                'lto_expiry_date' => $request->lto_expiry_date
             ]);
 
             Idcard::create([
                 'user_id' => $userId,
-                'id_type' => $data['id_type'],
-                'id_number' => $data['id_number'],
-                'expiry_date' => $data['expiry_date'],
+                'id_type' => $request->id_type,
+                'id_number' =>$request->id_number,
+                'expiry_date' =>$request->expiry_date
             ]);
-
         }
-        
-        $token = $user->createToken('TutsForWeb')->accessToken;
 
+        $token = $user->createToken('Cab')->accessToken;
         return response()->json(['token' => $token], 200);
     }
+
 
     /**
      * Handles Login Request
@@ -91,6 +85,7 @@ class PassportController extends Controller
     public function login(Request $request)
     {
         $credentials = [
+
             'email' => $request->email,
             'password' => $request->password
         ];
